@@ -7,13 +7,15 @@ Router.map(function () {
 		waitOn: function () {
 			return [
 				Meteor.subscribe('categories'),
-				Meteor.subscribe('courses'),
+				Meteor.subscribe('course', this.params._id),
 				Meteor.subscribe('users'),
 				Meteor.subscribe('events')
 			]
 		},
 		data: function () {
 			var course = Courses.findOne({_id: this.params._id})
+			// this should not be necessary if waitOn actually waited for the course subscription to be loaded
+			if (!course) return {};
 			return {
 				edit: !!this.params.edit,
 				roleDetails: loadroles(course, this.params.enrol),
@@ -23,7 +25,7 @@ Router.map(function () {
 		},
 		onAfterAction: function() {
 			var course = Courses.findOne({_id: this.params._id})
-			if (!course) return; // wtf
+			if (!course) return;
 			document.title = webpagename + 'Course: ' + course.name
 		}
 	})
@@ -33,7 +35,7 @@ Router.map(function () {
 		waitOn: function () {
 			return [
 				Meteor.subscribe('categories'),
-				Meteor.subscribe('courses'),
+				Meteor.subscribe('course', this.params._id),
 				Meteor.subscribe('users'),
 				Meteor.subscribe('events')
 			]

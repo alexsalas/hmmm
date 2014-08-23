@@ -1,0 +1,3 @@
+-remove course subscription everywhere, only use filtered subscription: change the way calender loads data
+
+-remove comment subscription, only load comments of current course

@@ -1,8 +1,7 @@
 "use strict";
 
-Meteor.publish ('courses', function(region){
-	if(!region) return Courses.find();
-	return Courses.find({region: region});
+Meteor.publish ('course', function(courseId){
+	return Courses.find({_id: courseId});
 });
 
 Meteor.publish ('coursesFind', function(region, query, filter){
@@ -52,8 +51,9 @@ Meteor.publish ('locations', function(){
 	return Locations.find();
 });
 
-Meteor.publish ('discussions', function(){
-	return CourseDiscussions.find();
+Meteor.publish ('discussions', function(courseId){
+	var query = {course_ID: courseId};
+	return CourseDiscussions.find(query);
 });
 
 
