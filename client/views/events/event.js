@@ -186,7 +186,7 @@ Template.event.events({
 		if(fileList != null){
 
 			var tmp = []				
-			$.each( this.files, function( i,fileObj ){
+			$.each(fileList, function( i,fileObj ){
 				tmp.push( fileObj );
 			});
 			
